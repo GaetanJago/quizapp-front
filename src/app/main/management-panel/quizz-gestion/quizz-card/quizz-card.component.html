@@ -1,0 +1,22 @@
+<mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="detail-row">
+            <div class="detail-block">
+                <span class="detail-desc">Questions</span>
+                <span class="detail">{{ nbQuestions }}</span>
+            </div>
+            <div class="detail-block">
+                <span class="detail-desc">Score moyen</span>
+                <span class="detail">{{ averageScore }} / {{ nbQuestions }}</span>
+            </div>
+        </div>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions>
+        <button [routerLink]="['edition', id]" mat-raised-button color="primary">Editer</button>
+        <button mat-raised-button color="warn">Supprimer</button>
+    </mat-card-actions>
+  </mat-card>

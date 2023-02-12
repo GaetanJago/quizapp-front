@@ -1,0 +1,41 @@
+.card{
+    width: 400px;
+}
+
+.detail-row {
+    display: flex;
+    margin: 50px 0px;
+}
+
+.detail-block {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 70%;
+}
+
+.detail-desc {
+    font-size: 16px;
+    padding-bottom: 12px;
+}
+
+.detail {
+    margin: auto;
+    font-size: 26px;
+}
+
+mat-card-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+mat-card-header {
+    justify-content: center;
+}
+
+mat-card-title {
+    font-family: 'Poppins';
+    justify-content: center;
+}

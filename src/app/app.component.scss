@@ -1,0 +1,19 @@
+.page-container{
+    display: flex;
+}
+
+app-sidenav{
+    position: relative;
+    height: 100%;
+    width: 280px;
+    overflow: hidden;
+}
+
+.content-container{
+    margin-left: 280px;
+    padding: 50px 100px;
+}
+
+*{
+    font-family: 'Poppins';
+}

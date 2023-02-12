@@ -1,0 +1,31 @@
+
+<div class="top-buttons">
+    <button mat-raised-button routerLink="/gestion-quizz"> <i class='bx bx-left-arrow-alt'></i><span>Retour</span></button>
+</div>
+
+
+<mat-card class="card" *ngIf="quizz">
+    <mat-card-header>
+      <mat-card-title>{{ quizz.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content *ngIf="quizz.questions[numQuestion]">
+        <div class="question-header">Question {{ numQuestion + 1 }}</div>
+        <div class="question-label">{{ quizz.questions[numQuestion].label }}</div>
+        <div class="question-answers">
+            <div class="answer-block">
+                    <span class="text">Bonne réponse</span>
+                    <span class="label">{{ quizz.questions[numQuestion].goodAnswer }}</span>
+            </div>
+            <div class="answer-block" *ngFor="let badAnswer of quizz.questions[numQuestion].badAnswers; let i = index">
+                    <span class="text">Mauvaise réponse {{ i + 1 }}</span>
+                    <span class="label">{{ badAnswer }}</span>
+            </div>
+        </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary">Modifier</button>
+        <button mat-raised-button color="warn">Supprimer</button>
+    </mat-card-actions>
+</mat-card>
