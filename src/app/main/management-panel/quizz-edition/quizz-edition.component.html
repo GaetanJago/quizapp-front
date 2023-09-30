@@ -9,23 +9,59 @@
       <mat-card-title>{{ quizz.title }}</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
-    <mat-card-content *ngIf="quizz.questions[numQuestion]">
+    <mat-card-content>
         <div class="question-header">Question {{ numQuestion + 1 }}</div>
-        <div class="question-label">{{ quizz.questions[numQuestion].label }}</div>
-        <div class="question-answers">
-            <div class="answer-block">
-                    <span class="text">Bonne réponse</span>
-                    <span class="label">{{ quizz.questions[numQuestion].goodAnswer }}</span>
+
+        <div class="row">
+            <div class="col-md-1">
+                <i *ngIf="numQuestion > 0" class='arrow-question bx bxs-chevron-left' (click)="changeQuestion(-1)"></i>
             </div>
-            <div class="answer-block" *ngFor="let badAnswer of quizz.questions[numQuestion].badAnswers; let i = index">
-                    <span class="text">Mauvaise réponse {{ i + 1 }}</span>
-                    <span class="label">{{ badAnswer }}</span>
+            <div class="col-md-10">
+                <form [formGroup]="questionForm">
+                    <div class="question-label">
+                        <input type="text"  class="form-control" formControlName="label" placeholder="Intitulé de la question">
+                    </div>
+                    <div class="question-answers">
+                        <div class="answer-block">
+                            <table class="table table-borderless">
+                                <tr class="row">
+                                    <td class="col-md-3">
+                                        <span class="text">Bonne réponse</span>
+                                    </td>
+                                    <td class="col-md-9">
+                                        <input type="text"  class="form-control" formControlName="goodAnswer" placeholder="Bonne réponse">
+                                    </td>
+                                </tr>
+                                <ng-container formArrayName="badAnswers">
+                                    <tr class="row" *ngFor="let badAnswer of quizz.questions[numQuestion].badAnswers; let i = index" [formGroupName]="i">
+                                        <td class="col-md-3">
+                                            <span class="text">Mauvaise réponse {{ i + 1 }}</span>
+                                        </td>
+                                        <td class="col-md-9">
+                                            <input type="text" class="form-control" formControlName="badAnswer" placeholder="Mauvaise réponse {{ i + 1 }}">
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </table>
+                    
+                                   
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-1">
+                <i *ngIf="numQuestion < quizz.questions.length - 1" class='arrow-question bx bxs-chevron-right' (click)="changeQuestion(1)"></i>
+                <i *ngIf="numQuestion == quizz.questions.length - 1 && !isAddingQuestion" class='arrow-question bx bx-plus' (click)="addQuestion()"></i>
             </div>
         </div>
+        
+        
 
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary">Modifier</button>
-        <button mat-raised-button color="warn">Supprimer</button>
+        <button *ngIf="!editionQuestion" type="button" (click)="changeEditQuestionMode(true)" mat-raised-button color="primary">Modifier</button>
+        <button *ngIf="editionQuestion" type="button" (click)="saveQuestion()" mat-raised-button color="primary">Sauvegarder</button>
+        <button *ngIf="!editionQuestion" type="button" (click)="removeQuestionFromQuizz()" mat-raised-button color="warn">Supprimer</button>
+        <button *ngIf="editionQuestion" type="button" (click)="changeEditQuestionMode(false)" mat-raised-button color="warn">Annuler</button>
     </mat-card-actions>
 </mat-card>

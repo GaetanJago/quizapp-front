@@ -17,6 +17,6 @@
     </mat-card-content>
     <mat-card-actions>
         <button [routerLink]="['edition', id]" mat-raised-button color="primary">Editer</button>
-        <button mat-raised-button color="warn">Supprimer</button>
+        <button mat-raised-button color="warn" (click)="deleteQuizz()">Supprimer</button>
     </mat-card-actions>
   </mat-card>

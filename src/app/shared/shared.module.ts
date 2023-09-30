@@ -4,7 +4,10 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule} from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
 import { MatDividerModule} from '@angular/material/divider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -16,14 +19,21 @@ import { MatDividerModule} from '@angular/material/divider';
     RouterModule,
     MatButtonModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     RouterModule,
     SidenavComponent,
     MatButtonModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatInputModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }

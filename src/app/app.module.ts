@@ -9,6 +9,7 @@ import { MainModule } from './main/main.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BaseUrlInterceptor } from './conf/APIInterceptor';
 import { environment } from 'src/environments/environment.development';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

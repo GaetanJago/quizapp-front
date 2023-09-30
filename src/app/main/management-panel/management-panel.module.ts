@@ -4,7 +4,7 @@ import { QuizzGestionComponent } from './quizz-gestion/quizz-gestion.component';
 import { QuizzCardComponent } from './quizz-gestion/quizz-card/quizz-card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QuizzEditionComponent } from './quizz-edition/quizz-edition.component';
-import { RouterModule } from '@angular/router';
+import { QuizzCreationComponent } from './quizz-creation/quizz-creation.component';
 
 
 
@@ -12,7 +12,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     QuizzGestionComponent,
     QuizzCardComponent,
-    QuizzEditionComponent
+    QuizzEditionComponent,
+    QuizzCreationComponent
   ],
   imports: [
     CommonModule,

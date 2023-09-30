@@ -1,8 +1,8 @@
 <h1>Gérer les quizz</h1>
 <div class="action-row">
-    <button mat-raised-button color="primary">Créer un nouveau quizz</button>
+    <button mat-raised-button color="primary" (click)="openDialogCreationQuizz()">Créer un nouveau quizz</button>
 </div>
 
 <div class="quizz-container" *ngFor="let quizz of quizzs">
-    <app-quizz-card [id]="quizz._id" [title]="quizz.title" [nbQuestions]="quizz.questions.length" [averageScore]="0"></app-quizz-card>
+    <app-quizz-card [id]="quizz._id!" [title]="quizz.title!" [nbQuestions]="quizz.questions!.length" [averageScore]="0" (quizzDeleted)="removeQuizz($event)"></app-quizz-card>
 </div>

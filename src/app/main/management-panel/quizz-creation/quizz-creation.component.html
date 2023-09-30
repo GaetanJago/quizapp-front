@@ -1,0 +1,11 @@
+<div id="popup">
+    <h1>Titre</h1>
+    <form [formGroup]="creationQuizzForm" (ngSubmit)="createQuizz()">
+        <input type="text"  class="form-control" formControlName="title" placeholder="Titre">
+        
+        <mat-card-actions>
+            <button type="button" (click)="closeDialog()" mat-raised-button color="warn">Annuler</button>
+            <button type="submit" mat-raised-button color="primary">Créer</button>
+        </mat-card-actions>
+    </form>
+</div>
