@@ -32,7 +32,7 @@
                                         <input type="text"  class="form-control" formControlName="goodAnswer" placeholder="Bonne réponse">
                                     </td>
                                 </tr>
-                                <ng-container formArrayName="badAnswers">
+                                <ng-container *ngIf="quizz.questions[numQuestion]" formArrayName="badAnswers">
                                     <tr class="row" *ngFor="let badAnswer of quizz.questions[numQuestion].badAnswers; let i = index" [formGroupName]="i">
                                         <td class="col-md-3">
                                             <span class="text">Mauvaise réponse {{ i + 1 }}</span>

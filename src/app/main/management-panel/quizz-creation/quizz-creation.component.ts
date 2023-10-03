@@ -28,9 +28,8 @@ export class QuizzCreationComponent {
       title: this.creationQuizzForm.value['title']
     }
     this.quizzService.createQuizz(quizz).subscribe(result => {
-      console.log(result);
       const idQuizz : string = result.body?._id!;
-      this.router.navigate(['gestion-quizz', 'edition', idQuizz]).then(() => {
+      this.router.navigate(['gestion-quizz', 'edition', idQuizz], { state: { isNewQuizz: true, quizz: result.body } }).then(() => {
         this.dialogRef.close();
       })
     })

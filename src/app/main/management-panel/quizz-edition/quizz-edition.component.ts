@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { QuizzPopulated } from '@dto/quizz-populated';
 import { QuizzService } from 'src/app/shared/services/quizz.service';
 
@@ -16,9 +16,11 @@ export class QuizzEditionComponent implements OnInit {
   questionForm: FormGroup;
   editionQuestion: boolean = false;
   isAddingQuestion: boolean = false;
+  isNewQuizz: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private quizzService: QuizzService,
     private formBuilder: FormBuilder) {
       this.questionForm = this.formBuilder.group({
@@ -26,20 +28,29 @@ export class QuizzEditionComponent implements OnInit {
         goodAnswer: [{value: '', disabled: !this.editionQuestion}, Validators.required],
         badAnswers: this.formBuilder.array([])
       })
+      if(this.router.getCurrentNavigation()?.extras.state?.['isNewQuizz'] === true) {
+        this.isNewQuizz = true;
+        this.numQuestion = - 1; //On commence à numQuestion car on ajoute une question juste après
+        this.quizz = this.router.getCurrentNavigation()?.extras.state?.['quizz']
+        this.addQuestion();
+      }
     }
   
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
-      (params: Params) => {
-        this.quizzService.getQuizz(params['id']).subscribe(result => {
-          this.quizz = result.body ?? undefined;
-          this.questionForm.patchValue(this.quizz?.questions[this.numQuestion]!);
-          for(const badAnswer of this.quizz?.questions[this.numQuestion].badAnswers ?? [] ){
-            this.addBadAnswer(badAnswer);
-          }
-        })
-      }
-    )
+    if(this.isNewQuizz === false) {
+      this.activatedRoute.params.subscribe(
+        (params: Params) => {
+          this.quizzService.getQuizz(params['id']).subscribe(result => {
+            this.quizz = result.body ?? undefined;
+            this.questionForm.patchValue(this.quizz?.questions[this.numQuestion]!);
+            for(const badAnswer of this.quizz?.questions[this.numQuestion].badAnswers ?? [] ){
+              this.addBadAnswer(badAnswer);
+            }
+          })
+        }
+      );
+    }
+    
   }
 
   public addBadAnswer(value: string = ''): void {
@@ -58,6 +69,7 @@ export class QuizzEditionComponent implements OnInit {
     this.numQuestion += number;
     if(this.isAddingQuestion && number === -1) {
       this.quizz?.questions.pop();
+      this.editionQuestion = false;
     }
     this.isAddingQuestion = false;
     this.questionForm = this.formBuilder.group({
